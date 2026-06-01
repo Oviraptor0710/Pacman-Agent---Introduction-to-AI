@@ -20,7 +20,7 @@ WALL_ELECTRIC_BLUE = (0, 153, 255)
 WALL_PURPLE = (93, 63, 211)
 
 
-FOOD_YELLOW = (255, 255, 0)        # Bright classic yellow
+FOOD_PINK = (224, 102, 255)        # Bright classic yellow
 FOOD_WHITE = (255, 255, 255)       # Clean white dots
 FOOD_ORANGE = (255, 192, 76)       #
 

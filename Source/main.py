@@ -1,5 +1,6 @@
+import os
 import sys
-sys.path.append('..')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Source.Algorithms.Ghost_Move import Ghost_move_A_star
 from Source.Object.Player import Player
 from Source.Object.Wall import Wall
@@ -65,7 +66,7 @@ def check_Object(_map, row, col):
     if _map[row][col] == WALL:
         _wall.append(Wall(row, col, WALL_ELECTRIC_BLUE))
     if _map[row][col] == FOOD:
-        _food.append(Food(row, col, BLOCK_SIZE, BLOCK_SIZE, FOOD_ORANGE))
+        _food.append(Food(row, col, BLOCK_SIZE, BLOCK_SIZE, FOOD_PINK))
         _food_Position.append([row, col])
     if _map[row][col] == MONSTER:
         _ghost.append(Player(row, col, IMAGE_GHOST[len(_ghost) % len(IMAGE_GHOST)]))
@@ -336,9 +337,9 @@ done_2 = False
 def handleEndGame(status: int):
     global done_2
     done_2 = False
-    bg = pygame.image.load("images/Over_bg.jpg")
+    bg = pygame.image.load(os.path.join(IMAGE_DIR, "Over_bg.jpg"))
     bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
-    bg_w = pygame.image.load("images/win_bg.jpg")
+    bg_w = pygame.image.load(os.path.join(IMAGE_DIR, "win_bg.jpg"))
     bg_w = pygame.transform.scale(bg_w, (WIDTH, HEIGHT))
 
     def clickContinue():

@@ -31,10 +31,9 @@ class Food:
         self.rect = self.image.get_rect()
         self.rect.top = row * SIZE_WALL + MARGIN["TOP"]
         self.rect.left = col * SIZE_WALL + MARGIN["LEFT"]
-        # Điều chỉnh vị trí cho thức ăn lớn (màu vàng) để căn giữa
-        if color == FOOD_ORANGE:
-            self.rect.top += SIZE_WALL // 2 - height // 2
-            self.rect.left += SIZE_WALL // 2 - width // 2
+        # Căn giữa thức ăn trong ô lưới
+        self.rect.top += SIZE_WALL // 2 - height // 2
+        self.rect.left += SIZE_WALL // 2 - width // 2
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.left, self.rect.top))

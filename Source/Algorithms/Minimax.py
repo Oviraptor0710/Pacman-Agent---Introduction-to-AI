@@ -3,9 +3,6 @@ from Constants.constants import *
 
 _food_pos = []
 
-_food_pos = []
-
-
 def evaluationFunction(_map, pac_row, pac_col, N, M, score):
     # get food position
     ghost_pos = []
