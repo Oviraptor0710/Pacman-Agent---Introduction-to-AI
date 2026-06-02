@@ -7,7 +7,6 @@ Project được phát triển bằng Python và Pygame. Dự án triển khai n
 - Thuật toán AI
 - Cài đặt
 - Cách sử dụng
-- Cấu trúc dự án
 - Tùy chỉnh
 
 🚀 Tính năng chính
@@ -31,12 +30,12 @@ Thuật toán game theory
 Dự đoán và đối phó với di chuyển của ma quái
 4. A* cho Ghost
 Ghost sử dụng thuật toán A* để truy đuổi Pac-Man
-Lưu ý: Giải thích chi tiết thuật toán có trong Report!
+
 
 🛠 Cài đặt
-- Yêu cầu hệ thống
-Python 3.7+
-Pygame
+Yêu cầu hệ thống
+- Python 3.7+
+- Pygame
 Cách cài đặt
 # Clone repository
 git clone https://github.com/NeoCyber05/Pacman_Agent.git
@@ -55,43 +54,17 @@ Chọn map: Sử dụng menu để chọn 1 trong 5 map có sẵn
 
 Chọn thuật toán cho Ghost:
 
-No moving
-Random Move
-A* Move
+- No moving
+- Random Move
+- A* Move
 Chọn thuật toán cho Pacman:
 
-BFS
-Local Search
-Minimax
+- BFS
+- Local Search
+- Minimax
 Quan sát AI: Xem Pac-Man tự động di chuyển và thu thập thức ăn
-
 Điều khiển: Game chạy tự động, không cần control từ người dùng
-📁 Cấu trúc dự án
-Pacman_Agent/
-├── Source/                 # Mã nguồn chính
-│   ├── main.py            # File chính để chạy game
-│   ├── Algorithms/        # Các thuật toán AI
-│   │   ├── BFS.py        # Thuật toán BFS
-│   │   ├── LocalSearch.py # Thuật toán Local Search
-│   │   ├── Minimax.py    # Thuật toán Minimax
-│   │   ├── Ghost_Move.py # Thuật toán A* cho ma quái
-│   │   └── SearchAgent.py # Agent chính
-│   ├── Object/           # Các đối tượng game
-│   │   ├── Player.py     # Class Pac-Man và ma quái
-│   │   ├── Wall.py       # Class tường
-│   │   ├── Food.py       # Class thức ăn
-│   │   └── Menu.py       # Class menu
-│   ├── Utils/            # Các hàm tiện ích
-│   ├── Images/           # Hình ảnh sprites
-│   └── Constants/        # Các hằng số
-│       └── constants.py  # Cấu hình game
-├── Map/                  # Các file map
-│   ├── map1.txt         # Map 1
-│   ├── map2.txt         # Map 2
-│   ├── map3.txt         # Map 3
-│   ├── map4.txt         # Map 4
-│   └── map5.txt         # Map 5  
-└── README.md          
+
 
 🔧 Tùy chỉnh
 Thêm map mới
