@@ -4,19 +4,21 @@ Project được phát triển bằng Python và Pygame. Dự án triển khai n
 
 📋 Mục lục
 - Tính năng chính
-Thuật toán AI
-Cài đặt
-Cách sử dụng
-Cấu trúc dự án
-Tùy chỉnh
+- Thuật toán AI
+- Cài đặt
+- Cách sử dụng
+- Cấu trúc dự án
+- Tùy chỉnh
+
 🚀 Tính năng chính
-Game Pac-Man hoàn chỉnh: Giao diện đồ họa với Pygame
-AI Agent thông minh: Pac-Man tự động di chuyển dựa trên thuật toán được chọn
-Nhiều thuật toán AI: BFS, Local Search, Minimax
-Ghost Move: Ma quái di chuyển bằng thuật toán No moving/ Random/ A*
-Nhiều map: 5 map với địa hình khác nhau
-Hệ thống điểm số: Theo dõi điểm số trong game
-Menu tương tác: Giao diện menu để chọn map và thuật toán cho Pacman và Ghost
+- Game Pac-Man hoàn chỉnh: Giao diện đồ họa với Pygame
+- AI Agent thông minh: Pac-Man tự động di chuyển dựa trên thuật toán được chọn
+- Nhiều thuật toán AI: BFS, Local Search, Minimax
+- Ghost Move: Ma quái di chuyển bằng thuật toán No moving/ Random/ A*
+- Nhiều map: 5 map với địa hình khác nhau
+- Hệ thống điểm số: Theo dõi điểm số trong game
+- Menu tương tác: Giao diện menu để chọn map và thuật toán cho Pacman và Ghost
+
 🧠 Thuật toán AI
 1. BFS (Breadth-First Search)
 Thuật toán tìm kiếm theo chiều rộng
@@ -32,7 +34,7 @@ Ghost sử dụng thuật toán A* để truy đuổi Pac-Man
 Lưu ý: Giải thích chi tiết thuật toán có trong Report!
 
 🛠 Cài đặt
-Yêu cầu hệ thống
+- Yêu cầu hệ thống
 Python 3.7+
 Pygame
 Cách cài đặt
