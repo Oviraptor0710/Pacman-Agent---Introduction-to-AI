@@ -37,6 +37,7 @@ Yêu cầu hệ thống
 - Python 3.7+
 - Pygame
 Cách cài đặt
+```bash
 # Clone repository
 git clone https://github.com/NeoCyber05/Pacman_Agent.git
 cd Pacman_Agent
@@ -46,19 +47,22 @@ pip install pygame
 
 # Chạy game
 python Source/main.py
+```
+
 🎯 Cách sử dụng
 Khởi chạy game:
-
+```bash
 python Source/main.py
+```
+
 Chọn map: Sử dụng menu để chọn 1 trong 5 map có sẵn
 
 Chọn thuật toán cho Ghost:
-
 - No moving
 - Random Move
 - A* Move
-Chọn thuật toán cho Pacman:
 
+Chọn thuật toán cho Pacman:
 - BFS
 - Local Search
 - Minimax
@@ -67,7 +71,8 @@ Quan sát AI: Xem Pac-Man tự động di chuyển và thu thập thức ăn
 
 
 🔧 Tùy chỉnh
+
 Thêm map mới
-Tạo file .txt mới trong thư mục Map/
-Định dạng theo cấu trúc map hiện tại
-Cập nhật menu trong main.py
+- Tạo file .txt mới trong thư mục Map/
+- Định dạng theo cấu trúc map hiện tại
+- Cập nhật menu trong main.py
