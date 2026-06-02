@@ -3,7 +3,7 @@ Project Intro to AI : Đánh giá và kiểm thử thuật toán cho tác tử P
 Project được phát triển bằng Python và Pygame. Dự án triển khai nhiều thuật toán Search AI khác nhau để điều khiển Pac-Man tự động di chuyển và thu thập thức ăn trong khi tránh ma quái.
 
 📋 Mục lục
-Tính năng chính
+- Tính năng chính
 Thuật toán AI
 Cài đặt
 Cách sử dụng
