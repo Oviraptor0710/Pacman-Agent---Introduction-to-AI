@@ -44,6 +44,9 @@ git clone https://github.com/Oviraptor0710/Pacman-Agent---Introduction-to-AI.git
 # Cài đặt dependencies
 pip install pygame
 
+# Thay đổi working directory sang thư mục con Pacman-Agent---Introduction-to-AI
+cd Pacman-Agent---Introduction-to-AI
+
 # Chạy game
 python Source/main.py
 ```
