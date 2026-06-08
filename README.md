@@ -40,7 +40,6 @@ Cách cài đặt
 ```bash
 # Clone repository
 git clone https://github.com/Oviraptor0710/Pacman-Agent---Introduction-to-AI.git
-cd Pacman_Agent
 
 # Cài đặt dependencies
 pip install pygame
