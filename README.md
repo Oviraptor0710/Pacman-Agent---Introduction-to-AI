@@ -39,7 +39,7 @@ Yêu cầu hệ thống
 Cách cài đặt
 ```bash
 # Clone repository
-git clone https://github.com/NeoCyber05/Pacman_Agent.git](https://github.com/Oviraptor0710/Pacman-Agent---Introduction-to-AI.git
+git clone https://github.com/Oviraptor0710/Pacman-Agent---Introduction-to-AI.git
 cd Pacman_Agent
 
 # Cài đặt dependencies
