@@ -19,8 +19,15 @@ _N = _M = 0
 __map = 0
 SIZE_WALL = 20
 
-menu_bg = pygame.image.load(os.path.join(IMAGE_DIR, "ghost_level_bg.png"))  # Create this image
+menu_bg = pygame.image.load(os.path.join(IMAGE_DIR, "algo_bg.png"))  # Create this image
 menu_bg = pygame.transform.scale(menu_bg, (WIDTH, HEIGHT))
+
+algo_bg_path = os.path.join(IMAGE_DIR, "algo_bg.png")
+if os.path.exists(algo_bg_path):
+    algo_bg = pygame.image.load(algo_bg_path)
+    algo_bg = pygame.transform.scale(algo_bg, (WIDTH, HEIGHT))
+else:
+    algo_bg = menu_bg  # Fallback nếu chưa tải ảnh vào
 
 
 
@@ -34,9 +41,9 @@ class Button:
         self.screen = screen
 
         self.fillColors = {
-            'normal': '#3498db',  # Blue
-            'hover': '#2980b9',  # Darker blue
-            'pressed': '#1f618d',  # Even darker blue
+            'normal': '#FF9900',  # Cam
+            'hover': '#E68A00',  # Cam đậm hơn (hover)
+            'pressed': '#CC7A00',  # Cam đậm nhất (click)
         }
 
         self.buttonSurface = pygame.Surface((self.width, self.height))
@@ -57,7 +64,7 @@ class Button:
             self.buttonRect.width / 2 - self.buttonSurf.get_rect().width / 2,
             self.buttonRect.height / 2 - self.buttonSurf.get_rect().height / 2
         ])
-        pygame.draw.rect(self.buttonSurface, WALL_DEEP_BLUE, (0, 0, self.width, self.height), 5)
+        pygame.draw.rect(self.buttonSurface, ORANGE, (0, 0, self.width, self.height), 5)
         self.screen.blit(self.buttonSurface, self.buttonRect)
 
 
@@ -72,41 +79,49 @@ class Menu:
         self.current_screen = 1
         self.screen = screen
         self.btnStart = Button(WIDTH // 2 - 100 + 5, HEIGHT - 170, 200, 100, screen, "Start", self.myFunction)
+        
+        # Button layout variables cho Screen 2 và Screen 5
+        button_width = 200
+        center_x = WIDTH // 2 - button_width // 2
+        start_y = HEIGHT // 2 - 160
+        gap = 125
 
         # Level buttons
-        self.btnLevel1 = Button(WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "No Moving",
+        self.btnLevel1 = Button(center_x, start_y, button_width, 80, screen, "No Moving",
                                 self._load_level_1)
-
-        self.btnLevel2 = Button(2 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "Random",
+        self.btnLevel2 = Button(center_x, start_y + gap, button_width, 80, screen, "Random",
                                 self._load_level_2)
-        self.btnLevel3 = Button(3 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "A*",
+        self.btnLevel3 = Button(center_x, start_y + 2 * gap, button_width, 80, screen, "A*",
                                 self._load_level_3)
 
         # Algorithm buttons
-        button_width = 200
-
-
-
-        self.btnBFS = Button(WIDTH // 4 - 100, HEIGHT // 2, button_width, 80, screen, "BFS",
+        self.btnBFS = Button(center_x, start_y, button_width, 80, screen, "BFS",
                              lambda: self._set_algorithm("BFS"))
-        self.btnLocalSearch = Button(2 * WIDTH // 4 - 100, HEIGHT // 2, button_width, 80, screen, "Local Search",
+        self.btnLocalSearch = Button(center_x, start_y + gap, button_width, 80, screen, "Local Search",
                                     lambda: self._set_algorithm("Local Search"))
-        self.btnMinimax = Button(3 * WIDTH // 4 - 100, HEIGHT // 2, button_width, 80, screen, "Minimax",
+        self.btnMinimax = Button(center_x, start_y + 2 * gap, button_width, 80, screen, "Minimax",
                                 lambda: self._set_algorithm("Minimax"))
 
         # Map navigation buttons
         self.btnPrev = Button(WIDTH // 2 - 250, HEIGHT // 4 * 3 + 35, 100, 100, screen, "<", self.prevMap)
         self.btnNext = Button(WIDTH // 2 + 150, HEIGHT // 4 * 3 + 35, 100, 100, screen, ">", self.nextMap)
         self.btnPlay = Button(WIDTH // 2 - 75, HEIGHT // 4 * 3 + 35, 150, 100, screen, "PLAY", self.selectMap)
-
-        # Back buttons
         self.btnBack = Button(40, HEIGHT // 4 * 3 + 35, 150, 100, screen, "BACK", self.goBack)
-        self.btnAlgoBack = Button(40, HEIGHT // 4 * 3 + 35, 150, 100, screen, "BACK", self.goBackToLevel)
+
+        # Back buttons for Level and Algorithm screens (centered, smaller height)
+        self.btnLevelBack = Button(WIDTH // 2 - 75, start_y + 3 * gap, 150, 60, screen, "BACK", self.goBackToMenu)
+        self.btnAlgoBack = Button(WIDTH // 2 - 75, start_y + 3 * gap, 150, 60, screen, "BACK", self.goBackToLevel)
 
     def myFunction(self):
         """Callback for the Start button"""
         if self.clicked:
             self.current_screen = 2  # Move to level selection screen
+        self.clicked = False
+
+    def goBackToMenu(self):
+        """Go back to main menu from level selection"""
+        if self.clicked:
+            self.current_screen = 1
         self.clicked = False
 
     def _set_algorithm(self, algorithm):
@@ -185,17 +200,24 @@ class Menu:
 
         MARGIN_TOP = 100
         MARGIN_LEFT = (WIDTH - M * SIZE_WALL) // 2
+        
+        # Tối ưu hóa: Load ảnh tường một lần duy nhất vào bộ nhớ (Preload)
+        wall_image_path = os.path.join(IMAGE_DIR, "wall.png")
+        if os.path.exists(wall_image_path):
+            wall_surf = pygame.image.load(wall_image_path).convert()
+            wall_surf = pygame.transform.scale(wall_surf, (SIZE_WALL, SIZE_WALL))
+        else:
+            wall_surf = pygame.Surface([SIZE_WALL, SIZE_WALL])
+            wall_surf.fill(WALL_DEEP_BLUE)
 
         for i in range(N):
             line = f.readline().split()
             for j in range(M):
                 cell = int(line[j])
                 if cell == WALL:
-                    image = pygame.Surface([SIZE_WALL, SIZE_WALL])
-                    pygame.draw.rect(image,WALL_ELECTRIC_BLUE, (0, 0, SIZE_WALL, SIZE_WALL), 1)
                     top = i * SIZE_WALL + MARGIN_TOP
                     left = j * SIZE_WALL + MARGIN_LEFT
-                    self.screen.blit(image, (left, top))
+                    self.screen.blit(wall_surf, (left, top))
                 elif cell == FOOD:
                     image = pygame.Surface([SIZE_WALL // 2, SIZE_WALL // 2])
                     image.fill(WHITE)
@@ -240,19 +262,21 @@ class Menu:
 
             elif self.current_screen == 2:
                 # Level selection
-                self.screen.blit(menu_bg, (0, 0))
-                text_surface = my_font.render('SELECT GHOST MOVE', False, BLUE_LIGHT)
-                self.screen.blit(text_surface, (WIDTH // 3 , 5))
+                self.screen.blit(algo_bg, (0, 0))
+                text_surface = my_font.render('SELECT GHOST MOVE', False, WHITE)
+                text_rect = text_surface.get_rect(center=(WIDTH // 2, 50))
+                self.screen.blit(text_surface, text_rect)
                 self.btnLevel1.process()
-                #self.btnLevel2.process()
                 self.btnLevel2.process()
                 self.btnLevel3.process()
+                self.btnLevelBack.process()
 
             elif self.current_screen == 5:
                 # Algorithm selection (new screen)
-                self.screen.blit(menu_bg, (0, 0))
-                text_surface = my_font.render('SELECT PACMAN ALGORITHMS', False, BLUE_LIGHT)
-                self.screen.blit(text_surface, (WIDTH // 3 -20 , 5))
+                self.screen.blit(algo_bg, (0, 0))
+                text_surface = my_font.render('SELECT PACMAN ALGORITHMS', False, WHITE)
+                text_rect = text_surface.get_rect(center=(WIDTH // 2, 50))
+                self.screen.blit(text_surface, text_rect)
                 self.btnBFS.process()
                 self.btnLocalSearch.process()
                 self.btnMinimax.process()
@@ -261,7 +285,7 @@ class Menu:
 
             elif self.current_screen == 3:
                 # Load map display
-                self.screen.fill(BLACK)
+                self.screen.fill((20, 30, 48)) # Màu Xanh Lam Đậm (Dark Navy) hợp với Cam
                 self.current_screen = 4
                 self.draw_map(self.map_name[self.current_map])
 
@@ -274,7 +298,7 @@ class Menu:
                 else :
                     X= 'A* Move'
                 text = f'{X} - {self.current_algorithm}'
-                text_surface = my_font.render(text, False, GREEN)
+                text_surface = my_font.render(text, False, WHITE) # Đổi sang chữ trắng
                 self.screen.blit(text_surface, (WIDTH // 2 - 200, 0))
                 self.btnNext.process()
                 self.btnPrev.process()

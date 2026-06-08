@@ -64,7 +64,7 @@ def readMapInFile(map_name: str):
 
 def check_Object(_map, row, col):
     if _map[row][col] == WALL:
-        _wall.append(Wall(row, col, WALL_ELECTRIC_BLUE))
+        _wall.append(Wall(row, col, WALL_DEEP_BLUE))
     if _map[row][col] == FOOD:
         _food.append(Food(row, col, BLOCK_SIZE, BLOCK_SIZE, FOOD_PINK))
         _food_Position.append([row, col])

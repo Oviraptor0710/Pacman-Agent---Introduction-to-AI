@@ -1,15 +1,19 @@
 import pygame
+import os
 
-from Source.Constants.constants import SIZE_WALL, MARGIN
+from Source.Constants.constants import SIZE_WALL, MARGIN, IMAGE_DIR
 
 
 class Wall:
     def __init__(self, row, col, color):
-        # Tạo bề mặt hình ảnh cho bức tường với kích thước cố định
-        self.image = pygame.Surface([SIZE_WALL, SIZE_WALL])
-        # self.image.fill(color)
-        # Vẽ hình chữ nhật với viền màu đã chỉ định
-        pygame.draw.rect(self.image, color, (0, 0, SIZE_WALL, SIZE_WALL), 1)
+        # Load hình ảnh tường thay vì vẽ màu
+        wall_image_path = os.path.join(IMAGE_DIR, "wall.png")
+        if os.path.exists(wall_image_path):
+            self.image = pygame.image.load(wall_image_path)
+            self.image = pygame.transform.scale(self.image, (SIZE_WALL, SIZE_WALL))
+        else:
+            self.image = pygame.Surface([SIZE_WALL, SIZE_WALL])
+            self.image.fill(color)
 
         # Lưu vị trí của bức tường trên lưới
         self.row = row
