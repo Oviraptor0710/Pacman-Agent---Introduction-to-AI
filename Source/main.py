@@ -1,7 +1,7 @@
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Source.Algorithms.Ghost_Move import Ghost_move_A_star
+from Source.Algorithms.Ghost_Move import A_Star
 from Source.Object.Player import Player
 from Source.Object.Wall import Wall
 from Source.Object.Food import Food
@@ -125,7 +125,7 @@ def generate_Ghost_new_position(_ghost, _type: int = 0) -> list[list[int]]:
             [end_row, end_col] = PacMan.getRC()
 
             # Get A* path
-            new_pos = Ghost_move_A_star(_map, start_row, start_col, end_row, end_col, N, M)
+            new_pos = A_Star(_map, start_row, start_col, end_row, end_col, N, M)
             # Check if position is already occupied
             if new_pos in occupied_positions:
                 # If collision would occur, keep ghost at current position
@@ -236,7 +236,7 @@ def startGame() -> None:
                     if timer >= SIZE_WALL or PacMan.touch_New_RC(new_row_Pac, new_col_Pac):
                         is_moving = False
                         PacMan.setRC(new_row_Pac, new_col_Pac)
-                        Score -= 1
+                        Score -= 2
 
                         # Check va chạm với thức ăn
                         for idx in range(len(_food)):
@@ -245,7 +245,7 @@ def startGame() -> None:
                                 _map[row_food][col_food] = EMPTY
                                 _food.pop(idx)
                                 _food_Position.pop(idx)
-                                Score += 50
+                                Score += 40
                                 break
                         new_PacMan_Pos = []
 
@@ -253,11 +253,12 @@ def startGame() -> None:
                     pac_can_move = False
                     done = True
                     status = -1
+                    Score = -20
 
                 if len(_food_Position) == 0:# Hết food => win
                     status = 1
                     done = True
-                if Score == -15 :  # Score = -15  => LOST
+                if Score == -20 :  # Score == -20  => LOST
                     pac_can_move = False
                     done = True
                     status = -1
@@ -320,6 +321,7 @@ def startGame() -> None:
                         pac_can_move = False
                         done = True
                         status = -1
+                        Score = -20
 
         # Vẽ các đối tượng lên màn hình
         screen.fill(BLACK)

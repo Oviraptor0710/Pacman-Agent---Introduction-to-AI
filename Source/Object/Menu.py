@@ -300,6 +300,15 @@ class Menu:
                 text = f'{X} - {self.current_algorithm}'
                 text_surface = my_font.render(text, False, WHITE) # Đổi sang chữ trắng
                 self.screen.blit(text_surface, (WIDTH // 2 - 200, 0))
+                
+                # Draw Map Name centered below the map
+                map_filename = os.path.basename(self.map_name[self.current_map])
+                map_name_str = map_filename.replace('.txt', '').capitalize()
+                map_name_str = map_name_str.replace('Map', 'Map ')
+                map_name_surface = my_font.render(map_name_str, False, ORANGE)
+                text_rect = map_name_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 90))
+                self.screen.blit(map_name_surface, text_rect)
+                
                 self.btnNext.process()
                 self.btnPrev.process()
                 self.btnPlay.process()
